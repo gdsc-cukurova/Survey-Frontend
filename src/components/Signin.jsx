@@ -1,8 +1,9 @@
 import React from 'react'
 import logo from '../assets/logo.png'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import Brand from './Brand'
 import { useState } from 'react'
+import axios from 'axios'
 
 function Signin() {
   const [isSubmitted, setIssubmitted] = useState(false);
@@ -12,17 +13,28 @@ function Signin() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setIssubmitted(true);
+    try{
+      const url = "http://localhost:5000/api/users/authenticate";
+      const {data:res} = await axios.post(url, values);
+      localStorage.setItem("token", res.data);
+      navigate("/login");
+      console.log(res.message)
+    } catch(err) {
+       console.log(err)
+    }
+   }
+
   const handleEmailChange = (event) => {
     setValues({...values, email: event.target.value})
   }
 
   const handlePasswordChange = (event) => {
     setValues({...values, password: event.target.value})
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIssubmitted(true);
   }
 
   return (
@@ -49,7 +61,7 @@ function Signin() {
             {isSubmitted && !values.email && <div style={{color: "red", fontSize: 12, padding: "5px"}}>Please enter email</div>} 
             {isSubmitted && values.email && !values.email.includes("@") &&  <div style={{color: "red", fontSize: 12, padding: "5px"}}>Please enter valid email</div> }
             <div className='bold fs-14 mt-20'>Password*</div>
-            <input onChange={handlePasswordChange} className='mt-10' type="password" />
+            <input name='password' onChange={handlePasswordChange} className='mt-10' type="password" />
             {isSubmitted && !values.password && <div style={{color: "red", fontSize: 12, padding: "5px"}} >Please enter Password</div>}
              {isSubmitted && values.password && values.password.length < 8 && <div style={{color: "red", fontSize: 12, padding: "5px"}}>
             Please enter 8 character</div>}

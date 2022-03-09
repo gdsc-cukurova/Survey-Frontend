@@ -13,7 +13,7 @@ function Home() {
           <Brand/>
           <div className="right-part flex">
             <div className="create-survey-btn">
-              <Button color="primary" variant="contained">Create Survey
+              <Button color="primary" variant="contained">Create New Survey
               <div className="add-icon mt-5 ml-10">
                <IoMdAdd style={{fontSize:'20px'}} />
               </div>

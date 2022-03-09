@@ -1,8 +1,9 @@
 import React from 'react'
 import logo from '../assets/logo.png'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import Brand from './Brand'
 import { useState } from 'react'
+import axios from 'axios'
 
 function Signup() {
   const [isSubmitted, setIssubmitted] = useState(false);
@@ -11,6 +12,21 @@ function Signup() {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+
+  async function registerUser(event) {
+    event.preventDefault();
+    setIssubmitted(true);
+    try{
+      const url = "http://localhost:5000/api/users/register";
+      const {data:res} = await axios.post(url, values);
+      navigate("/login");
+      console.log(res.message)
+    } catch(err) {
+       console.log(err)
+    }
+   }
 
   const handleNameChange = (event) => {
     setValues({...values, name: event.target.value})
@@ -24,15 +40,10 @@ function Signup() {
     setValues({...values, password: event.target.value})
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIssubmitted(true);
-  }
-
   return (
     <div>
       <Brand/>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={registerUser}>
           <img style={{marginLeft:"-45px"}} width="120px" height="120px" src={logo} alt="" />
           <div className="form mt-0">
             <h1>Sign up</h1>
@@ -58,12 +69,12 @@ function Signup() {
             {isSubmitted && !values.email && <div style={{color: "red", fontSize: 12, padding: "5px"}}>Please enter email</div>} 
             {isSubmitted && values.email && !values.email.includes("@") &&  <div style={{color: "red", fontSize: 12, padding: "5px"}}>Please enter valid email</div> }           
             <div className='bold fs-14 mt-20'>Password*</div>
-            <input placeholder='Min. 8 characters' onChange={handlePasswordChange}
+            <input name='password' placeholder='Min. 8 characters' onChange={handlePasswordChange}
             className='mt-10' type="password" />
              {isSubmitted && !values.password && <div style={{color: "red", fontSize: 12, padding: "5px"}} >Please enter Password</div>}
              {isSubmitted && values.password && values.password.length < 8 && <div style={{color: "red", fontSize: 12, padding: "5px"}}>Please enter 8 character</div>}
             <div>
-            <button onClick={(e)=>handleSubmit(e)} className='mt-30 login'>Sign Up</button>
+            <button onClick={(e)=>registerUser(e)} className='mt-30 login'>Sign Up</button>
             <div className="create-ac mt-20">
             <span className='bold mb-10 '>Already have an account?</span>
             <Link to="/login" >

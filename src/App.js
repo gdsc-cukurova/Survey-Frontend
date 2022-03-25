@@ -4,14 +4,15 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import { Routes, Route} from "react-router-dom";
 import Home from './pages/Home';
-import SurveyOne from './pages/surveyDisplay/surveyOne';
-import SurveyTwo from './pages/surveyDisplay/surveyTwo';
-import SurveyThree from './pages/surveyDisplay/surveyThree';
-import SurveyFour from './pages/surveyDisplay/surveyFour';
-import SurveyFive from './pages/surveyDisplay/surveyFive';
-import SurveySix from './pages/surveyDisplay/surveySix';
-import SurveySeven from './pages/surveyDisplay/surveySeven';
-import SurveyEight from './pages/surveyDisplay/surveyEight';
+import SurveyOne from './pages/surveyTypes/surveytypeOne';
+import SurveyTwo from './pages/surveyTypes/surveytypeTwo';
+import SurveyThree from './pages/surveyTypes/surveytypeThree';
+import SurveyFour from './pages/surveyTypes/surveytypeFour';
+import SurveyFive from './pages/surveyTypes/surveytypeFive';
+import SurveySix from './pages/surveyTypes/surveytypeSix';
+import SurveySeven from './pages/surveyTypes/surveytypeSeven';
+import SurveyEight from './pages/surveyTypes/surveytypeEight';
+
 function App() {
   return (
     <>

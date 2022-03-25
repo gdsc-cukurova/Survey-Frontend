@@ -1,13 +1,13 @@
 import React from 'react'
 import logo from '../assets/logo.png'
 import {Link, useNavigate} from "react-router-dom"
-import Brand from './Brand'
+import Brand from '../components/Brand'
 import { useState } from 'react'
 import axios from 'axios'
 
-function Signin() {
+function Login() {
   const [isSubmitted, setIssubmitted] = useState(false);
-  const [values, setValues] =  useState({
+  const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
@@ -38,7 +38,7 @@ function Signin() {
   }
 
   return (
-    <div >
+    <div className='login-form common' >
       <Brand/>
         <form onSubmit={handleSubmit}>
           <img style={{marginLeft:"-45px"}} width="120px" height="120px" src={logo} alt="" />
@@ -79,4 +79,4 @@ function Signin() {
   )
 }
 
-export default Signin
+export default Login

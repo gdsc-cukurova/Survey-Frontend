@@ -1,11 +1,10 @@
 import React from 'react'
 import logo from '../assets/logo.png'
 import {Link, useNavigate} from "react-router-dom"
-import Brand from './Brand'
+import Brand from '../components/Brand'
 import { useState } from 'react'
 import axios from 'axios'
-
-function Signup() {
+function Register() {
   const [isSubmitted, setIssubmitted] = useState(false);
   const [values, setValues] =  useState({
     name: "",
@@ -41,10 +40,10 @@ function Signup() {
   }
 
   return (
-    <div>
+    <div className='register-form common'>
       <Brand/>
         <form onSubmit={registerUser}>
-          <img style={{marginLeft:"-45px"}} width="120px" height="120px" src={logo} alt="" />
+          <img style={{marginLeft:"-45px", }} width="120px" height="120px" src={logo} alt="" />
           <div className="form mt-0">
             <h1>Sign up</h1>
             <p className='login-desc'>Get feedback about anything by attending/creating online surveys!</p>
@@ -87,4 +86,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export default Register
